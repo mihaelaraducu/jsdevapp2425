@@ -1,0 +1,13 @@
+
+<h2>{{description}}</h2>
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae sit porro consequatur accusantium, soluta saepe, consectetur assumenda, dolores dignissimos ut iusto eum incidunt non nulla repellat esse molestiae temporibus asperiores!</p>
+
+<h3>Change image form</h3>
+<input type="text" [(ngModel)] = "description" />
+
+<p>{{ showImage }}</p>
+<img *ngIf = 'showImage' [src]="myimg" alt="" srcset="" width="250px">
+<p>Follow button</p>
+<button (click) = 'hello()' >Click Here</button>
+
+<button (click) = 'showImg()' >Show Image</button>
