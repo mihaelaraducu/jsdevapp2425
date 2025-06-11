@@ -28,5 +28,5 @@ export const routes: Routes = [
       description: 'Profil user info',
     },
   },
-  { path: '**', component: HomeComponent }, // Wildcard route for a 404 page
+  { path: '**', component: HomeComponent}, // Wildcard route for a 404 page //NotFoundComponent, inlocuim cu HomeComponent pentru a evita eroarea 404 in timpul dezvoltarii
 ];
