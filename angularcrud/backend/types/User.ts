@@ -10,6 +10,7 @@ export interface BasicUser {
     poza?: string, // string path to the image
     telefon: string,
     dataadaugare?:Date,
+    status?: number,
     actiune?:string
   }
   export interface UserWithDetails extends BasicUser, User{

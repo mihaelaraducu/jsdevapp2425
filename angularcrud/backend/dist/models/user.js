@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteUser = exports.update = exports.create = exports.findOne = exports.findAll = void 0;
+exports.statusUser = exports.deleteUser = exports.update = exports.create = exports.findOne = exports.findAll = void 0;
 const db_1 = require("../db");
 // Get all users
 const findAll = (callback) => {
@@ -22,6 +22,7 @@ const findAll = (callback) => {
                 cnp: row.cnp,
                 poza: row.poza,
                 dataadaugare: row.dataadaugare,
+                status: row.status,
                 actiune: "",
             };
             users.push(user);
@@ -88,3 +89,20 @@ const deleteUser = (id, callback) => {
     });
 };
 exports.deleteUser = deleteUser;
+const statusUser = (userInfo, callback) => {
+    let status = 1;
+    if (userInfo.userStatus == 0) {
+        status = 1;
+    }
+    else {
+        status = 0;
+    }
+    const queryString = `UPDATE jsusers SET status =? WHERE id=?`;
+    db_1.db.query(queryString, [status, userInfo.userId], (err, result) => {
+        if (err) {
+            callback(err);
+        }
+        callback(null);
+    });
+};
+exports.statusUser = statusUser;

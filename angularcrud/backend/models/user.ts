@@ -1,6 +1,7 @@
 import { User } from "./../types/User";
 import { db } from "../db";
 import { OkPacket, RowDataPacket } from "mysql2";
+import { userInfo } from "os";
 // Get all users
 export const findAll = (callback: Function) => {
   const queryString = `SELECT * FROM jsusers`;
@@ -21,6 +22,7 @@ export const findAll = (callback: Function) => {
         cnp: row.cnp,
         poza: row.poza,
         dataadaugare: row.dataadaugare,
+        status: row.status,
         actiune: "",
       };
       users.push(user);
@@ -88,6 +90,25 @@ export const deleteUser = (id: number, callback: Function) => {
   const queryString = `DELETE FROM jsusers WHERE id=?`;
 
   db.query(queryString, [id], (err, result) => {
+    if (err) {
+      callback(err);
+    }
+    callback(null);
+  });
+};
+
+export const statusUser = (userInfo:any, callback: Function) => {
+  let status = 1;
+  if(userInfo.userStatus == 0){
+    status = 1;
+  }
+  else{
+    status = 0;
+  }
+  
+  const queryString = `UPDATE jsusers SET status =? WHERE id=?`;
+
+  db.query(queryString, [status,userInfo.userId], (err, result) => {
     if (err) {
       callback(err);
     }
