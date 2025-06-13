@@ -3,19 +3,40 @@
 //     curs?: string; 
 // }
 
+import { useState } from "react";
+
 type SalutInfo = {
     nume: string;
-    curs?: string; 
+    curs?: number; 
+}
+const initialMesaj = {
+    mesaj: ''
 }
 export default function Salut(props:SalutInfo) {
+    const [count, setCount] = useState(0);
+    const [state, setState] = useState(initialMesaj);
+    const inscris = () => {
+        setState({
+            mesaj: 'M-am inscris la curs'
+        })
+    }
     if(props.curs !== undefined) {
         return(
+        <>
             <div>Salut {props.nume} esti inscris la cursul de {props.curs}</div>
+            <button onClick={() => setCount ((count) => count + 2)}>
+                {props.nume} Adauga stelute {count}
+            </button>
+        </>
         )
     }
     else{
         return(
-            <div>Salut {props.nume} nu esti inscris la niciun curs</div>
+        <>
+            <div>Salut {props.nume} </div>
+            <button onClick={inscris}> Ma incsriu la curs</button>
+            <p>{state.mesaj}</p>
+        </>
         )
     }
   return (
